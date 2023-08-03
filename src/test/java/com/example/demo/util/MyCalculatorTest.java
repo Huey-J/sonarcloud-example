@@ -14,4 +14,21 @@ class MyCalculatorTest {
     assertEquals(3, result);
   }
 
+  @Test
+  void minusTest() {
+    int result = myCalculator.minus(5, 3);
+    assertEquals(2, result);
+  }
+
+  @Test
+  void multiplyTest() {
+    int result = myCalculator.multiply(2, 5);
+    assertEquals(10, result);
+  }
+
+  @Test
+  void divideTest() {
+    int result = myCalculator.divide(15, 4);
+    assertEquals(3, result);
+  }
 }
