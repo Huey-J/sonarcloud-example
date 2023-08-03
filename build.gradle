@@ -1,27 +1,46 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.1.3-SNAPSHOT'
-	id 'io.spring.dependency-management' version '1.1.2'
+    id 'java'
+    id 'org.springframework.boot' version '3.1.3-SNAPSHOT'
+    id 'io.spring.dependency-management' version '1.1.2'
+    id 'jacoco'  // jacoco 추가
+    id "org.sonarqube" version "4.2.1.3168" // sonarqube 추가
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
 repositories {
-	mavenCentral()
-	maven { url 'https://repo.spring.io/milestone' }
-	maven { url 'https://repo.spring.io/snapshot' }
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
 }
 
+sonar {
+    properties {
+        property "sonar.projectKey", "Huey-J_sonarcloud-example"
+        property "sonar.organization", "huey-j"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        // https://sonarsource.atlassian.net/browse/SONARGRADL-84
+        xml.getRequired().set(true)
+//        xml.enabled true
+    }
+}
+
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
